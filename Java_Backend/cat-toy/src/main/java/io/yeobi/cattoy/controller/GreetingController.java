@@ -2,6 +2,7 @@ package io.yeobi.cattoy.controller;
 
 import io.yeobi.cattoy.dto.Greeting;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -12,12 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class GreetingController {
 
     @GetMapping("/hello") // Get 메소드 형식의 요청 받는다.
-    public Greeting hello() {
+    public Greeting hello(
+            @RequestParam(defaultValue = "world") String name
+    ) {
         Greeting greeting = new Greeting();
         greeting.setName("yeobi");
-        greeting.setMessage("Hello, world");
+        greeting.setMessage("Hello, " + name);
 
-        // JSON return { "name": "yeobi", "message": "Hello, world" }
         return greeting;
     }
 
