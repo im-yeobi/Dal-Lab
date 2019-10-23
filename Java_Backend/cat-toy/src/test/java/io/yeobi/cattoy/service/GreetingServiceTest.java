@@ -21,7 +21,15 @@ public class GreetingServiceTest {
 
     @Test
     public void getMessage() {
-        assertThat(greetingService.getMessage()).isEqualTo("Hello");
+        assertThat(greetingService.getMessage(null)).isEqualTo(null);
+    }
+
+    /**
+     * 이름 있는 경우 테스트
+     */
+    @Test
+    public void getMessageWithName() {
+        assertThat(greetingService.getMessage("yeobi")).isEqualTo("yeobi");
     }
 
 }
