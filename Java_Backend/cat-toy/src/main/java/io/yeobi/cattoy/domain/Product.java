@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 
 import java.text.NumberFormat;
+import java.util.Objects;
 
 /**
  * @author yeobi
@@ -21,9 +22,13 @@ public class Product {
     @Getter
     private Integer price;
 
+    private String imageUrl;
+
     public String getPriceWithComma() {
         return NumberFormat.getInstance().format(price);
     }
 
-
+    public String getImageUrl() {
+        return Objects.isNull(imageUrl) ? "" : imageUrl;
+    }
 }

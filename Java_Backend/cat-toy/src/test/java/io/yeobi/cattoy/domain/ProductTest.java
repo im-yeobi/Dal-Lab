@@ -27,4 +27,22 @@ public class ProductTest {
         assertThat(product.getPriceWithComma()).isEqualTo("3,000");
     }
 
+    /**
+     * 기본 이미지 테스트
+     */
+    @Test
+    public void defaultImage() {
+        Product product = Product.builder()
+                .name("쥐돌이")
+                .maker("펭귄")
+                .price(3000)
+                .build();
+
+        assertThat(product.getImageUrl()).isEqualTo("");
+    }
+
+    /**
+     * 이미지 있는 경우 테스트
+     */
+
 }
