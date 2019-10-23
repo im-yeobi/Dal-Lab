@@ -1,6 +1,7 @@
 package io.yeobi.cattoy.domain;
 
 import lombok.Builder;
+import lombok.Getter;
 
 /**
  * @author yeobi
@@ -9,10 +10,7 @@ import lombok.Builder;
 @Builder
 public class Product {
 
+    @Getter
     private String name;
-
-    public String getName() {
-        return name;
-    }
 
 }
