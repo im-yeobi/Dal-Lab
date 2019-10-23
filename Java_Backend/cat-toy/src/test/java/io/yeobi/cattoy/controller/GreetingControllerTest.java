@@ -12,6 +12,7 @@ import org.springframework.test.web.servlet.ResultActions;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -51,6 +52,8 @@ public class GreetingControllerTest {
                                 containsString("Hello")
                         )
                 );  // Response의 content에 "Hello" 포함되어 있는지 테스트
+
+        verify(greetingService).getMessage(null);   // Given 사용되었는지 확인
     }
 
     @Test
@@ -75,6 +78,8 @@ public class GreetingControllerTest {
                                 containsString("yeobi")
                         )
                 );
+
+        verify(greetingService).getMessage("yeobi");
     }
 
 }
