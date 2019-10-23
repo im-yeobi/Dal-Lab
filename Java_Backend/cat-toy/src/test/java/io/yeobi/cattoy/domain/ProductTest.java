@@ -44,5 +44,18 @@ public class ProductTest {
     /**
      * 이미지 있는 경우 테스트
      */
+    @Test
+    public void changeImage() {
+        Product product = Product.builder()
+                .name("쥐돌이")
+                .maker("펭귄")
+                .price(3000)
+                .imageUrl("https://original")
+                .build();
+
+        product.changeImage("https://change");
+
+        assertThat(product.getImageUrl()).isEqualTo("https://change");
+    }
 
 }

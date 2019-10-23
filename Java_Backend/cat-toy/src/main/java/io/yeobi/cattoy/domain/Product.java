@@ -31,4 +31,9 @@ public class Product {
     public String getImageUrl() {
         return Objects.isNull(imageUrl) ? "" : imageUrl;
     }
+
+    public void changeImage(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
+
 }
