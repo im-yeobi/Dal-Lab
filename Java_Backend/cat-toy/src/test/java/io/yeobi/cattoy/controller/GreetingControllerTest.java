@@ -1,6 +1,7 @@
 package io.yeobi.cattoy.controller;
 
 import io.yeobi.cattoy.service.GreetingService;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,16 @@ public class GreetingControllerTest {
     @MockBean
     private GreetingService greetingService;
 
-    @Test
-    public void hello() throws Exception {
+    @Before
+    public void mockGreetingService() {
         // Given
         given(greetingService.getMessage(null)).willReturn("Hello");
 
+        given(greetingService.getMessage("yeobi")).willReturn("yeobi");
+    }
+
+    @Test
+    public void hello() throws Exception {
         // When
         ResultActions result = mockMvc.perform(
                 get("/hello")
@@ -58,9 +64,6 @@ public class GreetingControllerTest {
 
     @Test
     public void helloWithName() throws Exception {
-        // Given
-        given(greetingService.getMessage("yeobi")).willReturn("yeobi");
-
         // When
         ResultActions result = mockMvc.perform(
                 get(
