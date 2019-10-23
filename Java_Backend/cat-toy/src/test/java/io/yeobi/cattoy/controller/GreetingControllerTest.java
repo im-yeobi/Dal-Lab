@@ -1,9 +1,11 @@
 package io.yeobi.cattoy.controller;
 
+import io.yeobi.cattoy.service.GreetingService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -23,6 +25,9 @@ public class GreetingControllerTest {
 
     @Autowired
     private MockMvc mockMvc;    // MVC를 테스트 하기 위한 가짜 객체이다.
+
+    @SpyBean
+    private GreetingService greetingService;
 
     @Test
     public void hello() throws Exception {
