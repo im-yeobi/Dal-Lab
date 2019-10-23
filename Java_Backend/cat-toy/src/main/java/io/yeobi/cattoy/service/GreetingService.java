@@ -12,7 +12,7 @@ import java.util.Objects;
 public class GreetingService {
 
     public String getMessage(String name) {
-        return Objects.isNull(name) ? null : name;
+        return Objects.isNull(name) ? "Hello" : name;
     }
 
 }

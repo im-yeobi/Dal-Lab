@@ -31,9 +31,16 @@ public class GreetingControllerTest {
 
     @Test
     public void hello() throws Exception {
+        mockMvc.perform(get("/hello"))   // Query parameter `name`
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("Hello")));  // Response의 content에 "Hello" 포함되어 있는지 테스트
+    }
+
+    @Test
+    public void helloWithName() throws Exception {
         mockMvc.perform(get("/hello").param("name", "yeobi"))   // Query parameter `name`
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("Hello, yeobi")));  // Response의 content에 "Hello" 포함되어 있는지 테스트
+                .andExpect(content().string(containsString("yeobi")));
     }
 
 }
