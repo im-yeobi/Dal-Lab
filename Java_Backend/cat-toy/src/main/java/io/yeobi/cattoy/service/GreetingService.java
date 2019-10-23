@@ -1,8 +1,7 @@
 package io.yeobi.cattoy.service;
 
+import io.yeobi.cattoy.domain.Greeting;
 import org.springframework.stereotype.Service;
-
-import java.util.Objects;
 
 /**
  * @author yeobi
@@ -12,7 +11,11 @@ import java.util.Objects;
 public class GreetingService {
 
     public String getMessage(String name) {
-        return Objects.isNull(name) ? "Hello" : name;
+        Greeting greeting = Greeting.builder()
+                .name(name)
+                .build();
+
+        return greeting.getMessage();
     }
 
 }
