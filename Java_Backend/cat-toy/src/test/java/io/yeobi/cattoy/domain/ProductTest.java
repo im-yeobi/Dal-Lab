@@ -16,8 +16,9 @@ public class ProductTest {
      */
     @Test
     public void create() {
-        Product product = new Product();
-        product.setName("쥐돌이");
+        Product product = Product.builder()
+                .name("쥐돌이")
+                .build();
 
         assertThat(product.getName()).isEqualTo("쥐돌이");
     }
