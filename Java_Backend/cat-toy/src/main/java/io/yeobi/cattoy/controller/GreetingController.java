@@ -1,6 +1,6 @@
 package io.yeobi.cattoy.controller;
 
-import io.yeobi.cattoy.dto.Greeting;
+import io.yeobi.cattoy.dto.GreetingDto;
 import io.yeobi.cattoy.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,14 +18,14 @@ public class GreetingController {
     GreetingService greetingService;
 
     @GetMapping("/hello") // Get 메소드 형식의 요청 받는다.
-    public Greeting hello(
+    public GreetingDto hello(
             @RequestParam(required = false) String name
     ) {
-        Greeting greeting = new Greeting();
-        greeting.setName("yeobi");
-        greeting.setMessage(greetingService.getMessage(name));
+        GreetingDto greetingDto = new GreetingDto();
+        greetingDto.setName("yeobi");
+        greetingDto.setMessage(greetingService.getMessage(name));
 
-        return greeting;
+        return greetingDto;
     }
 
 }
