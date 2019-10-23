@@ -1,5 +1,6 @@
 package io.yeobi.cattoy.domain;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,17 +12,22 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 public class ProductTest {
 
+    private Product product;
+
+    @Before
+    public void setUp() {
+        product = Product.builder()
+                .name("쥐돌이")
+                .maker("펭귄")
+                .price(3000)
+                .build();
+    }
+
     /**
      * 상품 생성 테스트
      */
     @Test
     public void create() {
-        Product product = Product.builder()
-                .name("쥐돌이")
-                .maker("펭귄")
-                .price(3000)
-                .build();
-
         assertThat(product.getName()).isEqualTo("쥐돌이");
         assertThat(product.getMaker()).isEqualTo("펭귄");
         assertThat(product.getPriceWithComma()).isEqualTo("3,000");
@@ -32,12 +38,6 @@ public class ProductTest {
      */
     @Test
     public void defaultImage() {
-        Product product = Product.builder()
-                .name("쥐돌이")
-                .maker("펭귄")
-                .price(3000)
-                .build();
-
         assertThat(product.getImageUrl()).isEqualTo("");
     }
 
@@ -46,14 +46,8 @@ public class ProductTest {
      */
     @Test
     public void changeImage() {
-        Product product = Product.builder()
-                .name("쥐돌이")
-                .maker("펭귄")
-                .price(3000)
-                .imageUrl("https://original")
-                .build();
-
-        product.changeImage("https://change");
+        final String imageUrl = "https://change";
+        product.changeImage(imageUrl);
 
         assertThat(product.getImageUrl()).isEqualTo("https://change");
     }
