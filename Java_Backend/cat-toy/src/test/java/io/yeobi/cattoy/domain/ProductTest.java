@@ -18,9 +18,13 @@ public class ProductTest {
     public void create() {
         Product product = Product.builder()
                 .name("쥐돌이")
+                .maker("펭귄")
+                .price(3000)
                 .build();
 
         assertThat(product.getName()).isEqualTo("쥐돌이");
+        assertThat(product.getMaker()).isEqualTo("펭귄");
+        assertThat(product.getPriceWithComma()).isEqualTo("3,000");
     }
 
 }
