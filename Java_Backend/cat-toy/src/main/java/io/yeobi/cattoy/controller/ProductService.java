@@ -4,6 +4,7 @@ import io.yeobi.cattoy.Repository.ProductRepository;
 import io.yeobi.cattoy.domain.Product;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @created 2019-10-24
  */
 @Service
+@Transactional  // 트랜잭션 범위를 잡아주는 역할
 public class ProductService {
 
     private ProductRepository productRepository;
