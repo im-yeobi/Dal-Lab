@@ -25,7 +25,7 @@ public class ProductControllerTest {
      * GET /products
      */
     @Test
-    public void list() throws Exception {
+    public void list() throws Exception {   // 에러가 나는 것을 먼저 확인. 메소드 명은 GET_list로 해도 무방하다.
         mockMvc.perform(get("/products"))
                 .andExpect(status().isOk());
     }
