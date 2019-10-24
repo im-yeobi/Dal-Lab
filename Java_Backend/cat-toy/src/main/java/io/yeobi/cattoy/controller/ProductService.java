@@ -11,10 +11,17 @@ import java.util.List;
  * @created 2019-10-24
  */
 @Service
-public class ProductService {   // 예전에는 클래스를 만드는 것이 아니라 그 사이에 인터페이스를 두었다.
+public class ProductService {
+
+    private ArrayList<Product> products = new ArrayList<>();
 
     public List<Product> getProducts() {
-        return new ArrayList<>();
+        return new ArrayList<>(products);
     }
 
+    public void addProduct(String name) {
+        Product product = Product.builder().name(name).build();
+
+        products.add(product);
+    }
 }
