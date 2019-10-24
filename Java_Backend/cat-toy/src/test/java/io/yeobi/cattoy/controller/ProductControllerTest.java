@@ -1,5 +1,6 @@
 package io.yeobi.cattoy.controller;
 
+import io.yeobi.cattoy.dto.ProductDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,9 @@ public class ProductControllerTest {
      */
     @Test
     public void list() throws Exception {   // 에러가 나는 것을 먼저 확인. 메소드 명은 GET_list로 해도 무방하다.
+        ProductDto productDto = new ProductDto();
+        productDto.setName("쥐돌이");
+
         mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("쥐돌이")));
