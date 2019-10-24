@@ -61,17 +61,9 @@ public class ProductServiceTest {
 
     @Test
     public void add() {
-        List<Product> products = new ArrayList<>();
-        products.add(Product.builder().name("쥐돌이").build());
-
-        // Given
-        given(productRepository.findAll()).willReturn(products);
-
         productService.addProduct("쥐돌이");
 
         verify(productRepository).save(any());    // save 되었는지 확인. any : 어떤 것이든
-
-        assertThat(productService.getProducts()).isNotEmpty();
     }
 
 }
