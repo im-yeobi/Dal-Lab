@@ -3,7 +3,9 @@ package io.yeobi.cattoy.domain;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.persistence.Entity;    // javax : java 표준에서의 확장
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.text.NumberFormat;
 import java.util.Objects;
@@ -17,6 +19,7 @@ import java.util.Objects;
 public class Product {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto_increment. 해당 엔티티에 대해서만 인덱스를 준다.
     private Long id;
 
     @Getter
