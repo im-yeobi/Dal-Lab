@@ -16,7 +16,7 @@ public class ProductService {
     private ArrayList<Product> products = new ArrayList<>();
 
     public List<Product> getProducts() {
-        return new ArrayList<>(products);
+        return new ArrayList<>(products);   // List로 다시 묶는 이유는 뭘까?
     }
 
     public void addProduct(String name) {
