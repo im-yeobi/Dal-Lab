@@ -100,6 +100,8 @@ public class ProductControllerTest {
                 delete("/products/13")
         )
                 .andExpect(status().isOk());
+
+        verify(productService).removeProduct(13L);
     }
 
 }
