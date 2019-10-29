@@ -22,8 +22,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -93,6 +92,14 @@ public class ProductControllerTest {
                 .andExpect(header().string("location", "/products/1004"));
 
         verify(productService).addProduct(any(Product.class));  // any이긴한데 해당 클래스면 다 된다
+    }
+
+    @Test
+    public void destory() throws Exception {
+        mockMvc.perform(
+                delete("/products/13")
+        )
+                .andExpect(status().isOk());
     }
 
 }
