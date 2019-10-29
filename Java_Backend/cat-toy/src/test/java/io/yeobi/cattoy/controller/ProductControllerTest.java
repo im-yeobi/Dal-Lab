@@ -24,8 +24,7 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * @author yeobi
@@ -78,16 +77,22 @@ public class ProductControllerTest {
 
     @Test
     public void create() throws Exception {
+        Product product = Product.builder()
+                .id(1004L)
+                .build();
+
+        given(productService.addProduct(any())).willReturn(product);
+
         mockMvc.perform(
                 post("/products")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\":\"낚시대\", \"maker\":\"달랩\", " +
                                 "\"price\":5000}")
         )
-                .andExpect(status().isCreated());
-//        {"name":"낚시대", "maker":"달랩", "price":5000}
+                .andExpect(status().isCreated())
+                .andExpect(header().string("location", "/products/1004"));
 
-        verify(productService).addProduct(any(Product.class));
+        verify(productService).addProduct(any(Product.class));  // any이긴한데 해당 클래스면 다 된다
     }
 
 }

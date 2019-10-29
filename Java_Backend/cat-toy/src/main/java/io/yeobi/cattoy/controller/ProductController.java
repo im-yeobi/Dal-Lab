@@ -45,7 +45,7 @@ public class ProductController {
     ) throws URISyntaxException {
         Product product = productService.addProduct(mapper.map(productDto, Product.class));
 
-        URI location = new URI("/products/1004");
+        URI location = new URI("/products/" + product.getId());
         return ResponseEntity.created(location).build();
     }
 

@@ -1,7 +1,6 @@
 package io.yeobi.cattoy.domain;
 
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +19,7 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto_increment. 해당 엔티티에 대해서만 인덱스를 준다.
+    @Getter
     private Long id;
 
     @Getter
