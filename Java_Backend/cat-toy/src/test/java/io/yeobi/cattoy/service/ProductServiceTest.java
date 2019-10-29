@@ -60,7 +60,7 @@ public class ProductServiceTest {
 
     @Test
     public void add() {
-        productService.addProduct("쥐돌이");
+        productService.addProduct("쥐돌이", "", 3999);
 
         verify(productRepository).save(any());    // save 되었는지 확인. any : 어떤 것이든
     }

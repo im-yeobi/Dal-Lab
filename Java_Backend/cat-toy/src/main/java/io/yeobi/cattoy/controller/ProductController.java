@@ -40,6 +40,8 @@ public class ProductController {
 
     @PostMapping("/products")
     public ResponseEntity<?> create() throws URISyntaxException {
+        productService.addProduct("", "", 3999);
+
         URI location = new URI("/products/1004");
         return ResponseEntity.created(location).build();
     }

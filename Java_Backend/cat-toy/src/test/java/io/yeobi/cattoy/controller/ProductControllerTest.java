@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.boot.test.mock.mockito.SpyBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -76,8 +77,14 @@ public class ProductControllerTest {
 
     @Test
     public void create() throws Exception {
-        mockMvc.perform(post("/products"))
+        mockMvc.perform(
+                post("/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"낚시대\", \"maker\":\"달랩\", " +
+                                "\"price\":5000}")
+        )
                 .andExpect(status().isCreated());
+//        {"name":"낚시대", "maker":"달랩", "price":5000}
 
         verify(productService).addProduct("낚시대", "달랩", 5000);
     }
