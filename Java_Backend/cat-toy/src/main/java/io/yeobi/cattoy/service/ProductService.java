@@ -1,4 +1,4 @@
-package io.yeobi.cattoy.controller;
+package io.yeobi.cattoy.service;
 
 import io.yeobi.cattoy.Repository.ProductRepository;
 import io.yeobi.cattoy.domain.Product;

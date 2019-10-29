@@ -3,6 +3,7 @@ package io.yeobi.cattoy.controller;
 import com.github.dozermapper.core.Mapper;
 import io.yeobi.cattoy.domain.Product;
 import io.yeobi.cattoy.dto.ProductDto;
+import io.yeobi.cattoy.service.ProductService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,6 +21,7 @@ import static org.hamcrest.Matchers.containsString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -70,6 +72,12 @@ public class ProductControllerTest {
                 .andExpect(content().string(containsString("쥐돌이")));
 
         verify(productService).getProducts();   // 메소드 호출 확인
+    }
+
+    @Test
+    public void create() throws Exception {
+        mockMvc.perform(post("/products"))
+                .andExpect(status().isCreated());
     }
 
 }

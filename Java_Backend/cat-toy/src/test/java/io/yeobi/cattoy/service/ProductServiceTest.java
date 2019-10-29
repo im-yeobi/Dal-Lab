@@ -1,7 +1,6 @@
 package io.yeobi.cattoy.service;
 
 import io.yeobi.cattoy.Repository.ProductRepository;
-import io.yeobi.cattoy.controller.ProductService;
 import io.yeobi.cattoy.domain.Product;
 import org.junit.Before;
 import org.junit.Test;
