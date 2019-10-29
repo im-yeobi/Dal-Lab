@@ -1,6 +1,5 @@
 package io.yeobi.cattoy.controller;
 
-import com.github.dozermapper.core.DozerBeanMapperBuilder;
 import com.github.dozermapper.core.Mapper;
 import io.yeobi.cattoy.domain.Product;
 import io.yeobi.cattoy.dto.ProductDto;
@@ -19,13 +18,14 @@ import java.util.stream.Collectors;
 public class ProductController {
 
     @Autowired
+    Mapper mapper;
+
+    @Autowired
     private ProductService productService;
 
     @GetMapping("/products")
     public List<ProductDto> list() {    // 반환형을 Stream으로 할 수도 있다.
-        Mapper mapper = DozerBeanMapperBuilder.buildDefault();
-
-        List<Product> products = productService.getProducts();  // List를 또 다른 List로 바꾸기 위해 Stream을 사용한다.
+      List<Product> products = productService.getProducts();  // List를 또 다른 List로 바꾸기 위해 Stream을 사용한다.
 
         // Stream => functional program
         return products.stream()

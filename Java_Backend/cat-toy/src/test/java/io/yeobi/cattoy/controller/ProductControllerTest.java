@@ -1,5 +1,6 @@
 package io.yeobi.cattoy.controller;
 
+import com.github.dozermapper.core.Mapper;
 import io.yeobi.cattoy.domain.Product;
 import io.yeobi.cattoy.dto.ProductDto;
 import org.junit.Before;
@@ -8,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -34,6 +36,9 @@ public class ProductControllerTest {
 
     @MockBean
     private ProductService productService;
+
+    @SpyBean
+    private Mapper mapper;
 
     @Before
     public void mockProductService() {
