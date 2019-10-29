@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
@@ -39,8 +40,13 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<?> create() throws URISyntaxException {
-        productService.addProduct("", "", 3999);
+    public ResponseEntity<?> create(
+            @RequestBody ProductDto productDto
+    ) throws URISyntaxException {
+        String name = productDto.getName();
+        String maker = productDto.getMaker();
+        Integer price = productDto.getPrice();
+        productService.addProduct(name, maker, price);
 
         URI location = new URI("/products/1004");
         return ResponseEntity.created(location).build();

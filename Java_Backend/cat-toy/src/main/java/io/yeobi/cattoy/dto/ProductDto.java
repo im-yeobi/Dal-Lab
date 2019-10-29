@@ -11,4 +11,8 @@ public class ProductDto {
 
     private String name;
 
+    private String maker;
+
+    private Integer price;
+
 }
