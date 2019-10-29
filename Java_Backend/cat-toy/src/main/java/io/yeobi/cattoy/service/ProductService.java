@@ -25,19 +25,11 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    private ArrayList<Product> products = new ArrayList<>();
-
     public List<Product> getProducts() {
         return productRepository.findAll();   // List로 다시 묶는 이유는 뭘까?
     }
 
-    public void addProduct(String name, String maker, Integer price) {
-        Product product = Product.builder()
-                .name(name)
-                .maker(maker)
-                .price(price)
-                .build();
-
-        products.add(product);
+    public Product addProduct(Product product) {
+        return productRepository.save(product);
     }
 }

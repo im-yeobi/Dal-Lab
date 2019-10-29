@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -86,7 +87,7 @@ public class ProductControllerTest {
                 .andExpect(status().isCreated());
 //        {"name":"낚시대", "maker":"달랩", "price":5000}
 
-        verify(productService).addProduct("낚시대", "달랩", 5000);
+        verify(productService).addProduct(any(Product.class));
     }
 
 }
