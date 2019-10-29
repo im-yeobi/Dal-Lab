@@ -78,6 +78,8 @@ public class ProductControllerTest {
     public void create() throws Exception {
         mockMvc.perform(post("/products"))
                 .andExpect(status().isCreated());
+
+        verify(productService).addProduct("낚시대", "달랩", 5000);
     }
 
 }

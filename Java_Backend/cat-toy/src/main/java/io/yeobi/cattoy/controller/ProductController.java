@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -37,9 +39,9 @@ public class ProductController {
     }
 
     @PostMapping("/products")
-    public ResponseEntity<?> create() {
-        // TODO:
-        return ResponseEntity.status(201).build();  // 201 Created 반환
+    public ResponseEntity<?> create() throws URISyntaxException {
+        URI location = new URI("/products/1004");
+        return ResponseEntity.created(location).build();
     }
 
 }

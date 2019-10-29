@@ -31,8 +31,12 @@ public class ProductService {
         return productRepository.findAll();   // List로 다시 묶는 이유는 뭘까?
     }
 
-    public void addProduct(String name) {
-        Product product = Product.builder().name(name).build();
+    public void addProduct(String name, String maker, Integer price) {
+        Product product = Product.builder()
+                .name(name)
+                .maker(maker)
+                .price(price)
+                .build();
 
         products.add(product);
     }
