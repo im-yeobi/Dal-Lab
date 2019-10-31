@@ -37,11 +37,13 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void updateProduct(Long id, ProductDto productDto) {
+    public Product updateProduct(Long id, ProductDto productDto) {
         // TODO:
         Product product = productRepository.findById(id).get();
 
         product.changeWithDto(productDto);  // save가 필요없다. Transaction을 걸우
+
+        return product;
     }
 
     public void removeProduct(Long id) {

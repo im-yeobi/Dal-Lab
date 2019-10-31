@@ -56,11 +56,13 @@ public class ProductController {
     }
 
     @PatchMapping("/products/{id}")
-    public void update(
+    public ProductDto update(
             @PathVariable("id") Long id,
             @RequestBody ProductDto productDto
     ) {
-        productService.updateProduct(id, productDto);   // 객체로 넘기라
+        Product product = productService.updateProduct(id, productDto);   // 객체로 넘기라
+
+        return mapper.map(product, ProductDto.class);
     }
 
     @DeleteMapping("/products/{id}")
