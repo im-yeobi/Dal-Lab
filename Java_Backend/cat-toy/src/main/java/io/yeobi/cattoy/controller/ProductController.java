@@ -60,7 +60,7 @@ public class ProductController {
             @PathVariable("id") Long id,
             @RequestBody ProductDto productDto
     ) {
-        productService.updateProduct(id, productDto.getName(), productDto.getMaker(), productDto.getPrice());   // 객체로 넘기라
+        productService.updateProduct(id, productDto);   // 객체로 넘기라
     }
 
     @DeleteMapping("/products/{id}")

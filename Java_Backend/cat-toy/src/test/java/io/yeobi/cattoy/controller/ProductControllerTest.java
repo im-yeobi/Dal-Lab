@@ -64,8 +64,9 @@ public class ProductControllerTest {
         // 1. 상품 목록
         // 2. 제대로 상품 목록을 DTO로 변환하여 JSON 형태로 반환하는 것
         // 위 목적을 제외하고 Service에 대한 것들은 가짜로 만든다.
-        ProductDto productDto = new ProductDto();
-        productDto.setName("쥐돌이");
+        ProductDto productDto = ProductDto.builder()
+                .name("쥐돌이")
+                .build();
 
         mockMvc.perform(get("/products"))
                 .andExpect(status().isOk())
@@ -122,8 +123,12 @@ public class ProductControllerTest {
         )
                 .andExpect(status().isOk());
 
+        ProductDto productDto = ProductDto.builder()
+                .name("쥐돌이")
+                .build();
+
         // 뭔가 바뀌기
-        verify(productService).updateProduct(13L, "쥐돌이2", "달랩", 5000);
+        verify(productService).updateProduct(13L, productDto);
     }
 
     @Test

@@ -2,6 +2,7 @@ package io.yeobi.cattoy.service;
 
 import io.yeobi.cattoy.Repository.ProductRepository;
 import io.yeobi.cattoy.domain.Product;
+import io.yeobi.cattoy.dto.ProductDto;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -36,7 +37,7 @@ public class ProductService {
         return productRepository.save(product);
     }
 
-    public void updateProduct(long id, String name, String maker, int price) {
+    public void updateProduct(Long id, ProductDto productDto) {
         // TODO
     }
 
