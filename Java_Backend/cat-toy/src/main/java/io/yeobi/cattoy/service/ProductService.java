@@ -34,6 +34,6 @@ public class ProductService {
     }
 
     public void removeProduct(Long id) {
-        // TODO: delete id
+        productRepository.deleteById(id);   // JPA에 기본으로 구현되어 있다.
     }
 }

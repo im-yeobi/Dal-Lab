@@ -80,7 +80,7 @@ public class ProductControllerTest {
                 .id(1004L)
                 .build();
 
-        given(productService.addProduct(any())).willReturn(product);
+        given(productService.addProduct(any(Product.class))).willReturn(product);
 
         mockMvc.perform(
                 post("/products")
@@ -95,7 +95,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void destory() throws Exception {
+    public void destroy() throws Exception {
         mockMvc.perform(
                 delete("/products/13")
         )

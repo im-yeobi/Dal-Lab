@@ -56,13 +56,24 @@ public class ProductServiceTest {
         assertThat(productService.getProducts()).isNotEmpty();
     }
 
+    @Test
+    public void addProduct() {
+        Product product = Product.builder()
+                .name("쥐돌이")
+                .maker("달랩")
+                .price(5000)
+                .build();
 
+        productService.addProduct(product);
+
+        verify(productRepository).save(any());   // save 되었는지 확인. any : 어떤 것이든
+    }
 
     @Test
-    public void add() {
-//        productService.addProduct("쥐돌이", "", 3999);
+    public void removeProduct() {
+        productService.removeProduct(13L);
 
-//        verify(productRepository).save(any());    // save 되었는지 확인. any : 어떤 것이든
+        verify(productRepository).deleteById(13L);
     }
 
 }
