@@ -114,11 +114,58 @@ public class ProductControllerTest {
     }
 
     @Test
+    public void createWithInvalidAttributes() throws Exception {
+        mockMvc.perform(
+                post("/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"name\":\"낚시대\", \"maker\":\"달랩\", " +
+                                "\"price\":5000}")
+        )
+                .andExpect(status().isBadRequest());    // BadRequest 400, isUnprocessable Entity 422
+
+        verify(productService).addProduct(any(Product.class));
+    }
+
+    @Test
     public void update() throws Exception {// JSON 넘겨주기
         mockMvc.perform(patch("/products/13")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
                         "\"price\":5000}")
+        )
+                .andExpect(status().isOk());
+
+        ProductDto productDto = ProductDto.builder()
+                .name("쥐돌이2")
+                .build();
+
+        // 뭔가 바뀌기
+        verify(productService).updateProduct(13L, productDto);
+    }
+
+    @Test
+    public void updateWithInvalidAttributes() throws Exception {// JSON 넘겨주기
+        mockMvc.perform(patch("/products/13")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
+                        "\"price\":5000}")
+        )
+                .andExpect(status().isOk());
+
+        ProductDto productDto = ProductDto.builder()
+                .name("쥐돌이2")
+                .build();
+
+        // 뭔가 바뀌기
+        verify(productService).updateProduct(13L, productDto);
+    }
+
+    @Test
+    public void updateWithInvalidPrice() throws Exception {// JSON 넘겨주기
+        mockMvc.perform(patch("/products/13")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
+                        "\"price\":-5000}")
         )
                 .andExpect(status().isOk());
 

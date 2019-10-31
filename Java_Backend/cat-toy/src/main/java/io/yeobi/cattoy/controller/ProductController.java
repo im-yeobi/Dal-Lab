@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -47,7 +48,7 @@ public class ProductController {
 
     @PostMapping("/products")
     public ResponseEntity<?> create(
-            @RequestBody ProductDto productDto
+            @RequestBody @Valid ProductDto productDto
     ) throws URISyntaxException {
         Product product = productService.addProduct(mapper.map(productDto, Product.class));
 
@@ -58,7 +59,7 @@ public class ProductController {
     @PatchMapping("/products/{id}")
     public ProductDto update(
             @PathVariable("id") Long id,
-            @RequestBody ProductDto productDto
+            @RequestBody @Valid ProductDto productDto
     ) {
         Product product = productService.updateProduct(id, productDto);   // 객체로 넘기라
 

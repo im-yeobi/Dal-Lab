@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+
 /**
  * @author yeobi
  * @created 2019-10-24
@@ -19,12 +22,14 @@ public class ProductDto {
     @Mapping("id")
     private Long id;
 
+    @NotBlank   // 유효성 체크
     @Mapping("name")
     private String name;
 
     @Mapping("maker")
     private String maker;
 
+    @Min(0)
     @Mapping("price")
     private Integer price;
 
