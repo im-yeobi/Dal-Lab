@@ -75,6 +75,24 @@ public class ProductControllerTest {
     }
 
     @Test
+    public void detail() throws Exception {
+        Product product = Product.builder()
+                .name("쥐돌이")
+                .maker("달랩")
+                .price(5000)
+                .build();
+
+        given(productService.getProduct(13L)).willReturn(product);
+
+        mockMvc.perform(
+                get("/products/13")
+        ).andExpect(status().isOk())
+        .andExpect(content().string(containsString("쥐돌이")));
+
+        verify(productService).getProduct(13L);
+    }
+
+    @Test
     public void create() throws Exception {
         Product product = Product.builder()
                 .id(1004L)
@@ -95,21 +113,17 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void detail() throws Exception {
-        Product product = Product.builder()
-                .name("쥐돌이")
-                .maker("달랩")
-                .price(5000)
-                .build();
+    public void update() throws Exception {
+        // JSON 넘겨주기
+        mockMvc.perform(patch("/products/13")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
+                        "\"price\":5000}")
+        )
+                .andExpect(status().isOk());
 
-        given(productService.getProduct(13L)).willReturn(product);
-
-        mockMvc.perform(
-                get("/products/13")
-        ).andExpect(status().isOk())
-        .andExpect(content().string(containsString("쥐돌이")));
-
-        verify(productService).getProduct(13L);
+        // 뭔가 바뀌기
+        verify(productService).updateProduct(13L, "쥐돌이2", "달랩", 5000);
     }
 
     @Test

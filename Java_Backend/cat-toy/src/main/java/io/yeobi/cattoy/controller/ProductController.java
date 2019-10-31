@@ -55,6 +55,14 @@ public class ProductController {
         return ResponseEntity.created(location).build();
     }
 
+    @PatchMapping("/products/{id}")
+    public void update(
+            @PathVariable("id") Long id,
+            @RequestBody ProductDto productDto
+    ) {
+        productService.updateProduct(id, productDto.getName(), productDto.getMaker(), productDto.getPrice());   // 객체로 넘기라
+    }
+
     @DeleteMapping("/products/{id}")
     public void destroy(@PathVariable Long id) {
         productService.removeProduct(id);

@@ -5,7 +5,6 @@ import io.yeobi.cattoy.domain.Product;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,15 +28,19 @@ public class ProductService {
         return productRepository.findAll();   // List로 다시 묶는 이유는 뭘까?
     }
 
+    public Product getProduct(Long id) {
+        return productRepository.findById(id).get();    // Optional을 처리하긱 위해. orElse(null)은 null을 받는다. orElse(new Product)를 사용할 수도 있다.
+    }
+
     public Product addProduct(Product product) {
         return productRepository.save(product);
     }
 
-    public void removeProduct(Long id) {
-        productRepository.deleteById(id);   // JPA에 기본으로 구현되어 있다.
+    public void updateProduct(long id, String name, String maker, int price) {
+        // TODO
     }
 
-    public Product getProduct(Long id) {
-        return productRepository.findById(id).get();    // Optional을 처리하긱 위해. orElse(null)은 null을 받는다. orElse(new Product)를 사용할 수도 있다.
+    public void removeProduct(Long id) {
+        productRepository.deleteById(id);   // JPA에 기본으로 구현되어 있다.
     }
 }
