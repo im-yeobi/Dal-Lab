@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author yeobi
@@ -16,6 +17,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {   // �
 
     // 현재 사용하고 있는 메소드를 명시해준다. (개인의 스타일)
     List<Product> findAll();
+
+    Optional<Product> findById(Long id);
 
     Product save(Product product);
 

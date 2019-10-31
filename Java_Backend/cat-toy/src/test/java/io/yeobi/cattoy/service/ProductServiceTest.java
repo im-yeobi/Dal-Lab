@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -54,6 +55,21 @@ public class ProductServiceTest {
         MockitoAnnotations.initMocks(this); // 나한테 있는 Mock 부터있는 객체들을 모두 초기화 해준다.
 
         assertThat(productService.getProducts()).isNotEmpty();
+    }
+
+    @Test
+    public void getProduct() {
+        Product product = Product.builder()
+                .id(13L)
+                .build();
+
+        // product를 제대로 얻었나 ?
+        given(productRepository.findById(13L)).willReturn(Optional.of(product));
+
+        productService.getProduct(13L);
+
+        // productRepository를 제대로 활용했나 ?
+        verify(productRepository).findById(13L);
     }
 
     @Test
