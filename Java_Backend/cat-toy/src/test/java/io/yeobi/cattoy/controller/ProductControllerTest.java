@@ -4,6 +4,7 @@ import com.github.dozermapper.core.Mapper;
 import io.yeobi.cattoy.domain.Product;
 import io.yeobi.cattoy.dto.ProductDto;
 import io.yeobi.cattoy.service.ProductService;
+import jdk.jfr.Description;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
+import javax.persistence.EntityExistsException;
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,7 +79,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void detail() throws Exception {
+    public void detailWhenExists() throws Exception {
         Product product = Product.builder()
                 .name("쥐돌이")
                 .maker("달랩")
@@ -88,13 +91,26 @@ public class ProductControllerTest {
         mockMvc.perform(
                 get("/products/13")
         ).andExpect(status().isOk())
-        .andExpect(content().string(containsString("쥐돌이")));
+                .andExpect(content().string(containsString("쥐돌이")));
 
         verify(productService).getProduct(13L);
     }
 
     @Test
-    public void create() throws Exception {
+    @Description("상품 개별 조회 시, 없으면 예외 발생")
+    public void detailWhenProductNotExists() throws Exception {
+        given(productService.getProduct(13L))
+                .willThrow(new EntityNotFoundException());
+
+        mockMvc.perform(
+                get("/products/13")
+        ).andExpect(status().isNotFound());
+
+        verify(productService).getProduct(13L);
+    }
+
+    @Test
+    public void createWithValid() throws Exception {
         Product product = Product.builder()
                 .id(1004L)
                 .build();
