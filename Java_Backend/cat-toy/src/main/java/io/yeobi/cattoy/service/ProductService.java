@@ -36,4 +36,8 @@ public class ProductService {
     public void removeProduct(Long id) {
         productRepository.deleteById(id);   // JPA에 기본으로 구현되어 있다.
     }
+
+    public Product getProduct(Long id) {
+        return null;
+    }
 }
