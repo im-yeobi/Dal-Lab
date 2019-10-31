@@ -2,6 +2,7 @@ package io.yeobi.cattoy.service;
 
 import io.yeobi.cattoy.Repository.ProductRepository;
 import io.yeobi.cattoy.domain.Product;
+import io.yeobi.cattoy.dto.ProductDto;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -83,6 +84,28 @@ public class ProductServiceTest {
         productService.addProduct(product);
 
         verify(productRepository).save(any());   // save 되었는지 확인. any : 어떤 것이든
+    }
+
+    @Test
+    public void updateProduct() {
+        Product product = Product.builder()
+                .name("테스트")
+                .build();
+        given(productRepository.findById(13L)).willReturn(Optional.of(product));
+
+        ProductDto productDto = ProductDto.builder()
+                .name("쥐돌이")
+                .maker("달랩")
+                .price(5000)
+                .build();
+
+        productService.updateProduct(13L, productDto);
+
+        // 기존 Entity 얻기
+        verify(productRepository).findById(13L);
+
+        assertThat(product.getName()).isEqualTo("쥐돌이");
+        // 내용이 바뀜을 확인
     }
 
     @Test

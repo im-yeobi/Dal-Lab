@@ -38,7 +38,10 @@ public class ProductService {
     }
 
     public void updateProduct(Long id, ProductDto productDto) {
-        // TODO
+        // TODO:
+        Product product = productRepository.findById(id).get();
+
+        product.changeWithDto(productDto);  // save가 필요없다. Transaction을 걸우
     }
 
     public void removeProduct(Long id) {

@@ -114,8 +114,7 @@ public class ProductControllerTest {
     }
 
     @Test
-    public void update() throws Exception {
-        // JSON 넘겨주기
+    public void update() throws Exception {// JSON 넘겨주기
         mockMvc.perform(patch("/products/13")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
@@ -124,7 +123,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk());
 
         ProductDto productDto = ProductDto.builder()
-                .name("쥐돌이")
+                .name("쥐돌이2")
                 .build();
 
         // 뭔가 바뀌기

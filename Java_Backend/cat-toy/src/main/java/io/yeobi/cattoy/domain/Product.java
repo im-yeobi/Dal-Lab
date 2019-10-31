@@ -1,5 +1,6 @@
 package io.yeobi.cattoy.domain;
 
+import io.yeobi.cattoy.dto.ProductDto;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -45,4 +46,9 @@ public class Product {
         this.imageUrl = imageUrl;
     }
 
+    public void changeWithDto(ProductDto productDto) {  // 도메인에 DTO를 전달받았다.
+        name = productDto.getName();
+        maker = productDto.getMaker();
+        price = productDto.getPrice();
+    }
 }
