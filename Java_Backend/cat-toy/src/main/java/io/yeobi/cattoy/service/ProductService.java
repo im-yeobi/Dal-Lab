@@ -38,6 +38,6 @@ public class ProductService {
     }
 
     public Product getProduct(Long id) {
-        return null;
+        return productRepository.findById(id).get();    // Optional을 처리하긱 위해. orElse(null)은 null을 받는다. orElse(new Product)를 사용할 수도 있다.
     }
 }
