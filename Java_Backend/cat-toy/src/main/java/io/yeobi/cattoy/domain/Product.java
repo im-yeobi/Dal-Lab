@@ -3,10 +3,7 @@ package io.yeobi.cattoy.domain;
 import io.yeobi.cattoy.dto.ProductDto;
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.text.NumberFormat;
 import java.util.Objects;
 
@@ -34,6 +31,9 @@ public class Product {
 
     private String imageUrl;
 
+    @Transient  // DB 생략 어노테이션, 임시 변수일 때 종종 사용한다
+    private Boolean deleted;
+
     public String getPriceWithComma() {
         return NumberFormat.getInstance().format(price);
     }
@@ -51,4 +51,5 @@ public class Product {
         maker = productDto.getMaker();
         price = productDto.getPrice();
     }
+
 }
