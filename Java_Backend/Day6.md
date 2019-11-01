@@ -70,3 +70,5 @@ JPA 에서는 update에 대한 save를 할 필요가 없다. Transactional을 �
 - 공부해야 할 점
     - 스타트업에서는 왜 Java를 쓰지 않는가 ?
     - 그렇다면 Java는 대규모 프로젝트에서는 왜 사용하는가 ?
+
+## Mock 과 MockBean 비교하기
