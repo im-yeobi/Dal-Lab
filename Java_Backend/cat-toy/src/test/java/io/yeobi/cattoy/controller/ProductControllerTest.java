@@ -4,7 +4,6 @@ import com.github.dozermapper.core.Mapper;
 import io.yeobi.cattoy.domain.Product;
 import io.yeobi.cattoy.dto.ProductDto;
 import io.yeobi.cattoy.service.ProductService;
-import jdk.jfr.Description;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +15,6 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
-import javax.persistence.EntityExistsException;
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -59,6 +57,7 @@ public class ProductControllerTest {
 
     /**
      * GET /products
+     * 상품 전체 조회 API 테스트
      */
     @Test
     public void list() throws Exception {   // 에러가 나는 것을 먼저 확인. 메소드 명은 GET_list로 해도 무방하다.
@@ -78,6 +77,10 @@ public class ProductControllerTest {
         verify(productService).getProducts();   // 메소드 호출 확인
     }
 
+    /**
+     * 상품 개별 조회 API 테스트
+     * 조회하고자 하는 상품 있는 경우
+     */
     @Test
     public void detailWhenExists() throws Exception {
         Product product = Product.builder()
@@ -96,8 +99,11 @@ public class ProductControllerTest {
         verify(productService).getProduct(13L);
     }
 
+    /**
+     * 상품 개별 조회 API
+     * 조회하고자 하는 상품 없는 경우
+     */
     @Test
-    @Description("상품 개별 조회 시, 없으면 예외 발생")
     public void detailWhenProductNotExists() throws Exception {
         given(productService.getProduct(13L))
                 .willThrow(new EntityNotFoundException());
@@ -135,16 +141,15 @@ public class ProductControllerTest {
                 post("/products")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"name\":\"낚시대\", \"maker\":\"달랩\", " +
-                                "\"price\":5000}")
+                                "\"price\":-5000}")
         )
                 .andExpect(status().isBadRequest());    // BadRequest 400, isUnprocessable Entity 422
-
-        verify(productService).addProduct(any(Product.class));
     }
 
     @Test
-    public void update() throws Exception {// JSON 넘겨주기
-        mockMvc.perform(patch("/products/13")
+    public void updateWithValidAttributes() throws Exception {// JSON 넘겨주기
+        mockMvc.perform(
+                patch("/products/13")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
                         "\"price\":5000}")
@@ -153,6 +158,8 @@ public class ProductControllerTest {
 
         ProductDto productDto = ProductDto.builder()
                 .name("쥐돌이2")
+                .maker("달랩")
+                .price(5000)
                 .build();
 
         // 뭔가 바뀌기
@@ -163,17 +170,10 @@ public class ProductControllerTest {
     public void updateWithInvalidAttributes() throws Exception {// JSON 넘겨주기
         mockMvc.perform(patch("/products/13")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
+                .content("{\"name\":\"\", \"maker\":\"달랩\", " +
                         "\"price\":5000}")
         )
-                .andExpect(status().isOk());
-
-        ProductDto productDto = ProductDto.builder()
-                .name("쥐돌이2")
-                .build();
-
-        // 뭔가 바뀌기
-        verify(productService).updateProduct(13L, productDto);
+                .andExpect(status().isBadRequest());
     }
 
     @Test
@@ -183,14 +183,7 @@ public class ProductControllerTest {
                 .content("{\"name\":\"쥐돌이2\", \"maker\":\"달랩\", " +
                         "\"price\":-5000}")
         )
-                .andExpect(status().isOk());
-
-        ProductDto productDto = ProductDto.builder()
-                .name("쥐돌이2")
-                .build();
-
-        // 뭔가 바뀌기
-        verify(productService).updateProduct(13L, productDto);
+                .andExpect(status().isBadRequest());
     }
 
     @Test

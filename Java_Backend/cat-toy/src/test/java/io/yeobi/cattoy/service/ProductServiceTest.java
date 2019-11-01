@@ -30,6 +30,8 @@ public class ProductServiceTest {
 
     @Before
     public void setUp() {
+        MockitoAnnotations.initMocks(this); // Mock 객체 모두 초기화
+
         productService = new ProductService(productRepository);
     }
 
@@ -39,8 +41,6 @@ public class ProductServiceTest {
 
         // Given
         given(productRepository.findAll()).willReturn(products);
-
-        MockitoAnnotations.initMocks(this); // 나한테 있는 Mock 부터있는 객체들을 모두 초기화 해준다.
 
         assertThat(productService.getProducts()).isEmpty();
     }
@@ -52,8 +52,6 @@ public class ProductServiceTest {
 
         // Given
         given(productRepository.findAll()).willReturn(products);
-
-        MockitoAnnotations.initMocks(this); // 나한테 있는 Mock 부터있는 객체들을 모두 초기화 해준다.
 
         assertThat(productService.getProducts()).isNotEmpty();
     }

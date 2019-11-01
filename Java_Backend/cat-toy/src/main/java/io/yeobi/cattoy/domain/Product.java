@@ -13,6 +13,8 @@ import java.util.Objects;
  */
 @Entity // JPA에서 잡아주는 것이다
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
     @Id
