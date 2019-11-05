@@ -2,7 +2,9 @@ package io.yeobi.cattoy.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,6 +29,10 @@ public class User {
 
     private String email;
 
+    @Getter
     private String password;
 
+    public void hashPassword(PasswordEncoder passwordEncoder) { // 엔티티 안으로 Spring Security 관련 객체가 의존되는 단점이 있다.
+        password = passwordEncoder.encode(password);
+    }
 }

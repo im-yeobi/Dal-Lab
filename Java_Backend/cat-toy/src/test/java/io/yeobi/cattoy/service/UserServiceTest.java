@@ -5,7 +5,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 
 /**
@@ -16,13 +21,18 @@ public class UserServiceTest {
 
     private UserService userService;
 
+    private PasswordEncoder passwordEncoder;
+
     @Mock
     private UserRepository userRepository;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this); // Mock
-        userService = new UserService(userRepository);
+
+        passwordEncoder = new BCryptPasswordEncoder();
+
+        userService = new UserService(userRepository, passwordEncoder);
     }
 
     @Test
@@ -30,10 +40,14 @@ public class UserServiceTest {
         User user = User.builder()
                 .name("테스터")
                 .email("tester@example.com")
-                .password("pwd")
+                .password("pwd")    // 패스워드에 대한 암호화가 필요하다
                 .build();
 
-        userService.register(user);
+        given(userRepository.save(any())).willReturn(user);
+
+        User createdUser = userService.register(user);
+
+        assertThat(createdUser.getPassword()).isNotEqualTo("pwd");
 
         verify(userRepository).save(user);  // any(User.class)와 차이는 ?
     }
