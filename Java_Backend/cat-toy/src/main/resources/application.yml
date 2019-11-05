@@ -4,7 +4,11 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update  # DDL update
+jwt:
+  secret: "12345678901234567890123456789012"
+
 ---
+
 spring:
   profiles: test  # 환경변수 구분할 수 있다.
   datasource:
