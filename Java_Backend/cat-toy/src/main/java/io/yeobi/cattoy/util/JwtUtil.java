@@ -1,5 +1,6 @@
 package io.yeobi.cattoy.util;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
@@ -12,15 +13,13 @@ import java.security.Key;
  */
 public class JwtUtil {
     // 256 / 8 = 32자리 수보다 커야한다.
-    private final String secret;
+    private final Key key;
 
     public JwtUtil(String secret) {
-        this.secret = secret;
+        key = Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     public String createToken(long userId, String name) {
-        Key key = Keys.hmacShaKeyFor(secret.getBytes());
-
         String token = Jwts.builder()
                 .claim("userId", userId)
                 .claim("name", name)
@@ -28,5 +27,12 @@ public class JwtUtil {
                 .compact();
 
         return token;
+    }
+
+    public Claims parseToken(String token) {
+        return Jwts.parser()
+                .setSigningKey(key)
+                .parseClaimsJws(token)
+                .getBody();
     }
 }
