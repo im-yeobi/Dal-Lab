@@ -39,5 +39,8 @@ dependencies {
 	runtime 'io.jsonwebtoken:jjwt-impl:0.10.7'	// runtime에서는 구현체가 다를 수 있어 두 개를 넣었다.
 	runtime 'io.jsonwebtoken:jjwt-jackson:0.10.7'
 
+	// Security
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
