@@ -50,5 +50,19 @@
 > 13. JWT
 >
 > 14. 배포
+>    - [Docker Desktop 설치하기](https://www.youtube.com/watch?v=jaqU2I3BAhU)
+>    - [15분만에 Docker 시작하기](https://www.youtube.com/watch?v=tr4ExJZs3Jw)
 
-- 매일매일 교육 내용 정리
+
+
+### 매일매일 교육 내용 정리하기
+
+- [Day 1](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day1.md)
+- [Day 2](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day2.md)
+- [Day 3](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day3.md)
+- [Day 4](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day4.md)
+- [Day 5](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day5.md)
+- [Day 6](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day6.md)
+- [Day 7](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day7.md)
+- [Day 8](https://github.com/im-yeobi/Dal-Lab/blob/master/Java_Backend/Day8.md)
+
